@@ -1,26 +1,25 @@
 'use client'
-import { useContext } from 'react'
-import { cacheCtx } from '.'
-import { Countries, Country } from './types'
+import { useEffect, useState } from 'react'
+import { Country } from './types'
 
 export const useCache = () => {
-  const {
-    countries,
-    _: {
-      setCountries,
-    }
-  } = useContext(cacheCtx)
+  const [isEmpty, setIsEmpty] = useState<boolean>(true)
+
+  useEffect(() => {
+    caches.open('countries')
+      .then(async (cache: Cache) => {
+        const keys = await cache.keys()
+        setIsEmpty(!keys.length)
+      })
+  }, [setIsEmpty])
 
   const addCountry = (country: Country) => {
     caches.open('countries')
       .then((cache: Cache) => {
-        console.log('Adding country to cache:', country.code)
         cache.add(`/api/country/${country.code}`)
           .then(() => {
-            setCountries((prevState: Countries) => ({
-              ...prevState,
-              [country.code]: country,
-            }))
+            console.log(`Added country ${country.code} to cache`)
+            setIsEmpty(false)
           })
           .catch((err: Error) => {
             console.error(`There was an error caching /api/country/${country.code}:`, err)
@@ -76,6 +75,7 @@ export const useCache = () => {
             removeItem(key, cache)
           })
         })
+        setIsEmpty(true)
       })
   }
 
@@ -83,5 +83,6 @@ export const useCache = () => {
     addCountry,
     clear,
     hasCountry,
+    isEmpty,
   }
 }
