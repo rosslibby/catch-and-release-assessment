@@ -31,6 +31,32 @@ export const useCache = () => {
       })
   }
 
+  const hasCountry = (countryCode: string): Promise<Country | undefined> => new Promise(
+    (resolve, reject) => {
+      caches.open('countries')
+        .then((cache: Cache) => {
+          cache.match(`/api/country/${countryCode}`)
+            .then(async (res: Response | undefined) => {
+              if (!res) {
+                resolve(undefined)
+              } else {
+                const { data } = await res?.json()
+
+                resolve(data)
+              }
+            })
+            .catch((err: Error) => {
+              console.error(`Error reading cache for /api/country/${countryCode}:`, err)
+              reject(undefined)
+            })
+        })
+        .catch((err: Error) => {
+          console.error('Error reading "countries" cache:', err)
+          reject(undefined)
+        })
+    }
+  )
+
   const removeItem = (key: Request, cache: Cache): Promise<boolean> => new Promise(
     (resolve, reject) => {
       cache.delete(key)
@@ -56,5 +82,6 @@ export const useCache = () => {
   return {
     addCountry,
     clear,
+    hasCountry,
   }
 }
