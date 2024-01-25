@@ -20,12 +20,7 @@ export interface Country {
   states?: State
 }
 
-export interface Countries {
-  [key: string]: Country
-}
-
 export interface CacheData {
-  countries: Countries
   country?: Country | undefined
   _: {
     [key: string]: Function
