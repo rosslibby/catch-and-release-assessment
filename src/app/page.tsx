@@ -1,9 +1,10 @@
 'use client'
 import styles from './page.module.css'
 import Country from './country'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 
 export default function Home() {
+  const inputRef = useRef<HTMLInputElement>(null)
   const [value, setValue] = useState<string>('')
 
   return (
@@ -15,6 +16,7 @@ export default function Home() {
           id="input"
           onChange={(e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
           placeholder="Type a country"
+          ref={inputRef}
           type="text"
         />
         <input type="hidden" id="country-code" />
