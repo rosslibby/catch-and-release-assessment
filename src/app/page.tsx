@@ -1,11 +1,31 @@
 'use client'
 import styles from './page.module.css'
 import Country from './country'
-import { ChangeEvent, useRef, useState } from 'react'
+import { ChangeEvent, useCallback, useContext, useRef, useState } from 'react'
+import { cacheCtx, useCache } from './cache'
 
 export default function Home() {
   const inputRef = useRef<HTMLInputElement>(null)
+  const { addCountry, hasCountry } = useCache()
+  const { _: { setCountry } } = useContext(cacheCtx)
   const [value, setValue] = useState<string>('')
+
+  const submit = useCallback(async () => {
+    const cached = await hasCountry(value)
+
+    if (!cached) {
+      console.log('Fetching from not the cache')
+      const { data: { country } } = await (await fetch(`/api/country/${value}`)).json()
+      addCountry(country)
+      setCountry(country)
+    } else {
+      setCountry(cached)
+    }
+  }, [addCountry, hasCountry, setCountry, value])
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value.toUpperCase())
+  }
 
   return (
     <main className={styles.wrapper}>
@@ -14,7 +34,7 @@ export default function Home() {
         <input
           className={styles.input}
           id="input"
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value.toUpperCase())}
+          onChange={handleInputChange}
           placeholder="Type a country"
           ref={inputRef}
           type="text"
@@ -29,6 +49,7 @@ export default function Home() {
           className={styles.button}
           disabled={value.length !== 2 || !value.match(/[A-Z]{2}/g)}
           id="submit"
+          onClick={submit}
         >Submit</button>
         <button id="reset" className={styles.button}>Reset</button>
       </div>
