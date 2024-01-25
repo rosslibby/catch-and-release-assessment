@@ -9,11 +9,12 @@ import {
   useRef,
   useState,
 } from 'react'
-import { cacheCtx, useCache } from './cache'
+import { cacheCtx, useCache, useSearch } from './cache'
 
 export default function Home() {
   const inputRef = useRef<HTMLInputElement>(null)
   const { addCountry, clear, hasCountry, isEmpty } = useCache()
+  const { filter } = useSearch()
   const { _: { setCountry } } = useContext(cacheCtx)
   const [value, setValue] = useState<string>('')
 
@@ -35,6 +36,10 @@ export default function Home() {
     const handleEnterKey = (e: KeyboardEvent) => {
       if (e.key === 'Enter') {
         submit()
+      } else if (e.key.match(/[a-zA-Z]/g)?.length === 1) {
+        // filter cached results (if applicable)
+        const result = filter((e.target as HTMLInputElement).value + e.key)
+        console.log('result is', result)
       }
     }
 
