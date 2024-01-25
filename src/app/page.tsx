@@ -1,5 +1,6 @@
 'use client'
 import styles from './page.module.css'
+import Country from './country'
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <ul className={styles.suggestions} id="suggestions">
         </ul>
       </div>
+      <Country />
       <div className="buttons">
         <button
           className={styles.button}
