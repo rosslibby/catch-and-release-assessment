@@ -1,7 +1,14 @@
 'use client'
 import styles from './page.module.css'
 import Country from './country'
-import { ChangeEvent, useCallback, useContext, useRef, useState } from 'react'
+import {
+  ChangeEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import { cacheCtx, useCache } from './cache'
 
 export default function Home() {
@@ -14,7 +21,6 @@ export default function Home() {
     const cached = await hasCountry(value)
 
     if (!cached) {
-      console.log('Fetching from not the cache')
       const { data: { country } } = await (await fetch(`/api/country/${value}`)).json()
       addCountry(country)
       setCountry(country)
@@ -22,6 +28,24 @@ export default function Home() {
       setCountry(cached)
     }
   }, [addCountry, hasCountry, setCountry, value])
+
+  useEffect(() => {
+    let current = inputRef.current || null
+    const handleEnterKey = (e: KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        submit()
+      }
+    }
+
+    if (current) {
+      current.addEventListener('keydown', handleEnterKey)
+    }
+
+    return () => {
+      current?.removeEventListener('keydown', handleEnterKey)
+      current = null
+    }
+  }, [inputRef, submit])
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value.toUpperCase())
