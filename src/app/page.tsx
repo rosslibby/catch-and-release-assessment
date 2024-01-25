@@ -13,7 +13,7 @@ import { cacheCtx, useCache } from './cache'
 
 export default function Home() {
   const inputRef = useRef<HTMLInputElement>(null)
-  const { addCountry, hasCountry } = useCache()
+  const { addCountry, clear, hasCountry, isEmpty } = useCache()
   const { _: { setCountry } } = useContext(cacheCtx)
   const [value, setValue] = useState<string>('')
 
@@ -21,6 +21,7 @@ export default function Home() {
     const cached = await hasCountry(value)
 
     if (!cached) {
+      console.log('Fetching because it is not cached')
       const { data: { country } } = await (await fetch(`/api/country/${value}`)).json()
       addCountry(country)
       setCountry(country)
@@ -75,7 +76,12 @@ export default function Home() {
           id="submit"
           onClick={submit}
         >Submit</button>
-        <button id="reset" className={styles.button}>Reset</button>
+        <button
+          id="reset"
+          className={styles.button}
+          disabled={isEmpty}
+          onClick={clear}
+        >Refetch</button>
       </div>
     </main>
   )
