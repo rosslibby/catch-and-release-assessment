@@ -20,8 +20,13 @@ export interface Country {
   states?: State
 }
 
+export interface Data {
+  [key: string]: Country
+}
+
 export interface CacheData {
   country?: Country | undefined
+  data: Data
   _: {
     [key: string]: Function
   }
