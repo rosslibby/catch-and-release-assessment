@@ -14,7 +14,7 @@ export default function Home() {
         <input
           className={styles.input}
           id="input"
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value.toUpperCase())}
           placeholder="Type a country"
           ref={inputRef}
           type="text"
@@ -27,6 +27,7 @@ export default function Home() {
       <div className="buttons">
         <button
           className={styles.button}
+          disabled={value.length !== 2 || !value.match(/[A-Z]{2}/g)}
           id="submit"
         >Submit</button>
         <button id="reset" className={styles.button}>Reset</button>
