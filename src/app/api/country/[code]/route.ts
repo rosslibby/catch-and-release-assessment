@@ -1,3 +1,4 @@
+import { Country } from '@/app/cache/types'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(
@@ -16,22 +17,35 @@ export async function GET(
     }
   }`
 
-  const { data } = await (await fetch(`https://countries.trevorblades.com/`, {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-    body: JSON.stringify({
-      query,
-      variables: { code },
+  const data: Country | undefined | Error = await new Promise((resolve, reject) => fetch('https://countries.trevorblades.com/', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        query,
+        variables: { code },
+      })
+    }).then(async (res: Response) => {
+      const { data } = await res.json()
+      if (data) {
+        const { country } = data
+
+        if (country) {
+          resolve(country)
+        } else {
+          resolve(undefined)
+        }
+      }
+    }).catch((err: Error) => {
+      console.error('There was an error reaching the API:', err)
+      reject(err)
     })
-  })).json()
+  )
 
   return NextResponse.json(
-    {
-      data: data.country,
-    },
+    { data },
     { status: 200 },
   )
 }
