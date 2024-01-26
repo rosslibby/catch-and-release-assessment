@@ -3,10 +3,11 @@ import styles from './search.module.css'
 import { useSearch } from './hooks'
 import { cacheCtx, useCache } from '../cache'
 import { Country } from '../cache/types'
+import Suggestions from './suggestions'
 
 export default function Search() {
   const inputRef = useRef<HTMLInputElement>(null)
-  const { results, _: { setCountry } } = useContext(cacheCtx)
+  const { country, results, _: { setCountry } } = useContext(cacheCtx)
   const { addCountry, clear, hasCountry, isEmpty } = useCache()
   const { filter } = useSearch()
   const [value, setValue] = useState<string>('')
@@ -16,12 +17,27 @@ export default function Search() {
 
     if (!cached) {
       const { data } = await (await fetch(`/api/country/${value.toUpperCase()}`)).json()
-      addCountry(data)
-      setCountry(data)
+
+      if (data) {
+        addCountry(data)
+        setCountry(data)
+      }
     } else {
       setCountry(cached)
     }
   }, [addCountry, hasCountry, setCountry, value])
+
+  useEffect(() => {
+    let current = inputRef?.current || null
+
+    if (current && country) {
+      current.value = `(${country.code}) ${country.name}`
+    }
+
+    return () => {
+      current = null
+    }
+  }, [country, inputRef, setValue])
 
   useEffect(() => {
     let current = inputRef.current || null
@@ -57,15 +73,8 @@ export default function Search() {
           ref={inputRef}
           type="text"
         />
-        <input type="hidden" />
         {results && (
-          <ul className={styles.suggestions}>
-            {results.map((country: Country) => (
-              <li key={country.code} className={styles.suggestion}>
-                {`(${country.code}) ${country.name}`}
-              </li>
-            ))}
-          </ul>
+          <Suggestions />
         )}
       </div>
       <div className="buttons">
