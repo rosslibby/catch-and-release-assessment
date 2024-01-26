@@ -1,6 +1,6 @@
 .search {
   background-color: #11131c;
-  border: 5px solid #7a9bff;
+  border: 1px solid #232d4a;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -25,31 +25,6 @@
 
 .input::placeholder {
   color: #2a3350;
-}
-
-.suggestions {
-  font-size: 1rem;
-  margin: 0;
-  max-height: 22.5rem;
-  overflow: scroll;
-  padding: 0;
-}
-
-.suggestion {
-  border-bottom: 1px solid #171c2d;
-  color: #4353829c;
-  font-family: system-ui;
-  list-style: none;
-  padding: 1rem 0.25rem;
-  text-align: center;
-}
-
-.suggestion:hover,
-.suggestion:focus {
-  background-color: #3a65e4;
-  color: #122354;
-  cursor: pointer;
-  outline: none;
 }
 
 .button {
