@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import styles from './search.module.css'
+import styles from './suggestions.module.css'
 import { cacheCtx } from '../cache'
 import { Country } from '../cache/types'
 
