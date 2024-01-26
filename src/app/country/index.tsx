@@ -8,9 +8,12 @@ export default function Country() {
 
   return country ? (
     <div>
-      <ul>
+      <ul className={styles.country}>
         {Object.entries(country).map(([key, value]: [string, string]) => (
-          <li key={key}>{value}</li>
+          <li key={key}>
+            <span className={styles.key}>{key}:</span>
+            <span className={styles.value}>{value}</span>
+          </li>
         ))}
       </ul>
     </div>
