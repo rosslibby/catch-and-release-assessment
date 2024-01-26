@@ -4,7 +4,7 @@ import { Country, Data } from '../types'
 import { cacheCtx } from '..'
 
 export const useCache = () => {
-  const { _: { setData } } = useContext(cacheCtx)
+  const { _: { setData, setCountry, setResults } } = useContext(cacheCtx)
   const [isEmpty, setIsEmpty] = useState<boolean>(true)
 
   useEffect(() => {
@@ -96,6 +96,8 @@ export const useCache = () => {
         })
         setIsEmpty(true)
         setData({})
+        setResults([])
+        setCountry(undefined)
       })
   }
 
