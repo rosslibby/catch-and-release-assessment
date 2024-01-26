@@ -86,7 +86,9 @@ body {
 }
 
 body {
-  background-color: #161a26;
+  background-color: #516eff;
+  background: linear-gradient(142deg, #4d36d9, #3651d9);
+  height: 100vh;
 }
 
 a {

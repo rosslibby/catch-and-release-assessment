@@ -1,25 +1,27 @@
 .suggestions {
+  display: grid;
+  gap: 0.25rem;
+  grid-auto-flow: row;
   font-size: 1rem;
+  line-height: 32px;
+  list-style: none;
   margin: 0;
   max-height: 22.5rem;
   overflow: scroll;
-  padding: 0;
-  list-style: none;
-  line-height: 32px;
+  padding-bottom: 0.5rem;
 }
 
 .suggestion {
-  border-bottom: 1px solid #171c2d;
   color: #4353829c;
   font-family: system-ui;
   list-style: none;
-  padding: 0.75rem 1rem;
+  padding: 0.25rem 1rem;
 }
 
 .suggestion:hover,
 .suggestion:focus {
-  background-color: #3a65e4;
-  color: #122354;
+  background-color: #f0f1fc;
+  color: #576093;
   cursor: pointer;
   outline: none;
 }
