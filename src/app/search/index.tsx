@@ -13,8 +13,12 @@ import Suggestions from './suggestions'
 import Loading from './loading'
 
 export default function Search() {
+  const suggestionsRef = useRef<HTMLUListElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  const { country, results, _: { setCountry, setResults } } = useContext(cacheCtx)
+  const { country, results, _: {
+    setCountry,
+    setResults,
+  } } = useContext(cacheCtx)
   const { addCountry, clear, hasCountry, isEmpty } = useCache()
   const { filter } = useSearch()
   const [loading, setLoading] = useState<boolean>(false)
@@ -59,9 +63,12 @@ export default function Search() {
 
   useEffect(() => {
     let current = inputRef.current || null
+    let suggestions = suggestionsRef.current || null
     const handleEnterKey = (e: KeyboardEvent) => {
       if (e.key === 'Enter') {
         submit()
+      } else if (e.key === 'ArrowDown' && results.length && suggestions) {
+        (suggestions.firstChild as HTMLElement)?.focus()
       }
     }
 
@@ -72,8 +79,9 @@ export default function Search() {
     return () => {
       current?.removeEventListener('keydown', handleEnterKey)
       current = null
+      suggestions = null
     }
-  }, [inputRef, submit])
+  }, [inputRef, results, suggestionsRef, submit])
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value.toUpperCase())
@@ -106,7 +114,7 @@ export default function Search() {
 
         </div>
         {results.length > 0 && (
-          <Suggestions />
+          <Suggestions ref={suggestionsRef} />
         )}
       </div>
       {feedback.length > 0 && (
