@@ -73,7 +73,7 @@ export default function Search() {
           ref={inputRef}
           type="text"
         />
-        {results && (
+        {results.length > 0 && (
           <Suggestions />
         )}
       </div>
