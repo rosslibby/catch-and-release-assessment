@@ -5,7 +5,6 @@ export interface Country {
   emoji: string
   name: string
   native: string
-  phones: string[]
 }
 
 export interface Data {

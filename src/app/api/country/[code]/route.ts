@@ -13,7 +13,6 @@ export async function GET(
       emoji
       name
       native
-      phones
     }
   }`
 

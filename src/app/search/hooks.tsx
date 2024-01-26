@@ -33,7 +33,6 @@ export const useSearch = () => {
 
     if (specificCountry) {
       const [_, country] = specificCountry
-      console.log('result', country)
       setResults([country])
       return
     }
@@ -45,8 +44,6 @@ export const useSearch = () => {
         return name.lcStartsWith(lcQuery) || code.lcStartsWith(lcQuery)
       }
     ).map(([_, details]: [string, Country]) => details)
-
-    console.log('results', options)
 
     setResults(options)
     return
