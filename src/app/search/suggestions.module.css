@@ -1,14 +1,11 @@
 .suggestions {
-  background-color: #11131c;
-  border-top: 1px solid #232d4a;
-  box-sizing: border-box;
   font-size: 1rem;
-  line-height: 32px;
-  list-style: none;
   margin: 0;
   max-height: 22.5rem;
   overflow: scroll;
   padding: 0;
+  list-style: none;
+  line-height: 32px;
 }
 
 .suggestion {

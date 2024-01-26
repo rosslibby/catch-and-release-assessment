@@ -1,3 +1,9 @@
+.wrapper {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-rows: auto auto;
+}
+
 .search {
   background-color: #11131c;
   border: 1px solid #232d4a;

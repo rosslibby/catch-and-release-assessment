@@ -1,4 +1,29 @@
-.pre {
-  white-space: pre-line;
-  width: 100%;
+.country {
+  background-color: #11131c;
+  border-radius: 0.5rem;
+  border: 1px solid #232d4a;
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 2rem;
+  list-style: none;
+  margin: 0;
+  max-height: 22.5rem;
+  overflow: scroll;
+}
+
+.country li {
+  border-bottom: 1px dashed #252e47;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 2fr 14fr;
+  padding: 0.625rem 1.25rem;
+}
+
+.key {
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.value {
+  font-weight: 200;
 }
