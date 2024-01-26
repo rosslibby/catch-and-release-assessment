@@ -5,11 +5,17 @@ import { Country } from '../cache/types'
 
 declare global {
   interface String {
-    lcStartsWith(searchString: string, position?: number | undefined): boolean
+    lcStartsWith(
+      searchString: string,
+      position?: number | undefined,
+    ): boolean
   }
 }
 
-String.prototype.lcStartsWith = function (searchString: string, position?: number | undefined): boolean {
+String.prototype.lcStartsWith = function (
+  searchString: string,
+  position?: number | undefined,
+): boolean {
   return this.toLowerCase().indexOf(searchString) === 0
 }
 

@@ -1,8 +1,14 @@
-import { ChangeEvent, useCallback, useContext, useEffect, useRef, useState } from 'react'
+import {
+  ChangeEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import styles from './search.module.css'
 import { useSearch } from './hooks'
 import { cacheCtx, useCache } from '../cache'
-import { Country } from '../cache/types'
 import Suggestions from './suggestions'
 
 export default function Search() {
