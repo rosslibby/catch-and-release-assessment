@@ -10,15 +10,21 @@ import styles from './search.module.css'
 import { useSearch } from './hooks'
 import { cacheCtx, useCache } from '../cache'
 import Suggestions from './suggestions'
+import Loading from './loading'
 
 export default function Search() {
   const inputRef = useRef<HTMLInputElement>(null)
-  const { country, results, _: { setCountry } } = useContext(cacheCtx)
+  const { country, results, _: { setCountry, setResults } } = useContext(cacheCtx)
   const { addCountry, clear, hasCountry, isEmpty } = useCache()
   const { filter } = useSearch()
+  const [loading, setLoading] = useState<boolean>(false)
   const [value, setValue] = useState<string>('')
 
   const submit = useCallback(async () => {
+    setLoading(true)
+    setResults([])
+    setCountry(undefined)
+
     const cached = await hasCountry(value)
 
     if (!cached) {
@@ -31,7 +37,9 @@ export default function Search() {
     } else {
       setCountry(cached)
     }
-  }, [addCountry, hasCountry, setCountry, value])
+
+    setLoading(false)
+  }, [addCountry, hasCountry, setCountry, setLoading, value])
 
   useEffect(() => {
     let current = inputRef?.current || null
@@ -71,14 +79,19 @@ export default function Search() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.search}>
-        <input
-          autoComplete="hellno"
-          className={styles.input}
-          onChange={handleInputChange}
-          placeholder="Type a country"
-          ref={inputRef}
-          type="text"
-        />
+        <div className={styles.inputWrapper}>
+          <input
+            autoComplete="hellno"
+            className={styles.input}
+            onChange={handleInputChange}
+            placeholder="Type a country"
+            ref={inputRef}
+            type="text"
+          />
+          {loading && (
+            <Loading />
+          )}
+        </div>
         {results.length > 0 && (
           <Suggestions />
         )}
@@ -86,7 +99,7 @@ export default function Search() {
       <div className="buttons">
         <button
           className={styles.button}
-          disabled={value.length !== 2 || !value.match(/[A-Z]{2}/g)}
+          disabled={value.length !== 2 || !value.match(/[A-Z]{2}/g) || loading}
           id="submit"
           onClick={submit}
         >Submit</button>

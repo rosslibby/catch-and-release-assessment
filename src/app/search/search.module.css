@@ -11,6 +11,12 @@
   overflow: hidden;
 }
 
+.inputWrapper {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 19fr 1fr;
+}
+
 .input {
   background-color: transparent;
   border: none;
@@ -19,9 +25,8 @@
   color: #435383;
   font-family: system-ui;
   font-size: 1rem;
-  font-weight: 800;
-  padding: 1rem 0.25rem;
-  text-align: center;
+  font-weight: 400;
+  padding: 1rem;
   width: 100%;
 }
 
