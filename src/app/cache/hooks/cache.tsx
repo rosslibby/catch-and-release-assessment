@@ -19,7 +19,7 @@ export const useCache = () => {
                 const { data } = await res.json()
                 setData((prevState: Data) => ({
                   ...prevState,
-                  [data.country.code]: data.country,
+                  [data.code]: data,
                 }))
               }
             })
