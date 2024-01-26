@@ -19,8 +19,10 @@ export default function Search() {
   const { filter } = useSearch()
   const [loading, setLoading] = useState<boolean>(false)
   const [value, setValue] = useState<string>('')
+  const [feedback, setFeedback] = useState<string>('')
 
   const submit = useCallback(async () => {
+    setFeedback('')
     setLoading(true)
     setResults([])
     setCountry(undefined)
@@ -33,13 +35,15 @@ export default function Search() {
       if (data) {
         addCountry(data)
         setCountry(data)
+      } else {
+        setFeedback(`No results found for ${value.toUpperCase()}`)
       }
     } else {
       setCountry(cached)
     }
 
     setLoading(false)
-  }, [addCountry, hasCountry, setCountry, setLoading, value])
+  }, [addCountry, hasCountry, setCountry, setFeedback, setLoading, value])
 
   useEffect(() => {
     let current = inputRef?.current || null
@@ -105,6 +109,9 @@ export default function Search() {
           <Suggestions />
         )}
       </div>
+      {feedback.length > 0 && (
+        <p>{feedback}</p>
+      )}
       <div className="buttons">
         <button
           id="reset"
