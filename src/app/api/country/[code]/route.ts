@@ -11,19 +11,9 @@ export async function GET(
       capital
       currency
       emoji
-      languages {
-        name
-        native
-      }
       name
       native
       phones
-      states {
-        country {
-          name
-        }
-        name
-      }
     }
   }`
 
@@ -41,7 +31,7 @@ export async function GET(
 
   return NextResponse.json(
     {
-      data,
+      data: data.country,
     },
     { status: 200 },
   )
