@@ -11,6 +11,10 @@
   padding-bottom: 0.5rem;
 }
 
+.closed {
+  padding: 0;
+}
+
 .suggestion {
   color: #4353829c;
   font-family: system-ui;

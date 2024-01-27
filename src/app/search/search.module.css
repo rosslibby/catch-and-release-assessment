@@ -69,6 +69,10 @@
   color: #576093bd;
 }
 
+.input::selection {
+  background-color: #7038ff42;
+}
+
 .button {
   background-color: #7a9bff;
   border: none;
