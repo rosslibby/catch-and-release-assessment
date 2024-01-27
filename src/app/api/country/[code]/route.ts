@@ -1,4 +1,4 @@
-import { Country } from '@/app/cache/types'
+import { Country } from '@/app/data/types'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(
@@ -9,20 +9,18 @@ export async function GET(
 
   if (!code || code.match(/[^a-zA-Z .]/g)?.length || code.length > 2) {
     return NextResponse.json({
-      data: {
-        message: code ? 'The country code you submitted was invalid' : 'No country code was provided',
-      },
+      message: code ? 'The country code you submitted was invalid' : 'No country code was provided',
     }, { status: code ? 400 : 422 })
   }
 
   const query = `query GetCountryById($code: ID!) {
     country(code: $code) {
-      code
-      capital
-      currency
       emoji
+      code
       name
       native
+      capital
+      currency
     }
   }`
 
@@ -55,9 +53,8 @@ export async function GET(
 
   return NextResponse.json(
     {
-      data: data || {
-        message: `No data found for country code ${code}`,
-      },
+      [data ? 'data' : 'message']: data
+        || `No data found for country code ${code}`,
     },
     { status: data ? 200 : 404 },
   )
