@@ -1,5 +1,7 @@
 # Catch and Release Front End Assessment
 
+## Try out the live [demo](https://catch-and-release-asssessment.vercel.app/)
+
 Hey all, thanks for reviewing my project!
 
 - Build with [Next.js](https://nextjs.org/)
