@@ -33,6 +33,7 @@ export default function Search() {
           <input
             autoComplete="hellno"
             className={styles.input}
+            data-testid="input"
             onChange={changeInput}
             placeholder="Enter a country code (e.g. US)"
             onFocus={() => setFocused(true)}
@@ -55,9 +56,9 @@ export default function Search() {
 
       <div className="buttons">
         <button
-          id="reset"
           className={styles.button}
           disabled={isEmpty}
+          role="refetch"
           onClick={clear}
         >Refetch</button>
       </div>

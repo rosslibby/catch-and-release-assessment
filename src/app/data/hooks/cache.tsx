@@ -12,6 +12,8 @@ export const useCache = () => {
   const [isEmpty, setIsEmpty] = useState<boolean>(true)
 
   useEffect(() => {
+    if (!window.caches) return
+
     caches.open('countries')
       .then(async (cache: Cache) => {
         const keys = await cache.keys()

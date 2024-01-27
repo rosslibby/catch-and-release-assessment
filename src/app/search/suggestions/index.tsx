@@ -28,7 +28,7 @@ export default forwardRef(function Suggestions(
   useNav(ulRef, inputRef)
 
   return (
-    <ul className={classNames} ref={ulRef}>
+    <ul className={classNames} ref={ulRef} data-testid="suggestion-list">
       {results.map((country: Country, index: number) => (
         <Suggestion country={country} key={`${country.code}-${index}`} />
       ))}

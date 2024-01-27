@@ -25,6 +25,7 @@
     "@vitest/ui": "^1.2.2",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
+    "jest-environment-jsdom": "26",
     "jsdom": "^24.0.0",
     "typescript": "^5",
     "vite-tsconfig-paths": "^4.3.1",

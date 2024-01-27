@@ -8,11 +8,14 @@ export default function SubmitButton({ value }: {
 }) {
   const { loading } = useContext(appCtx)
   const { submit } = useApi()
+  const disabled = value.length !== 2 || !value.match(/[A-Z]{2}/g) || loading
+
   return (
     <button
       className={styles.searchButton}
-      disabled={value.length !== 2 || !value.match(/[A-Z]{2}/g) || loading}
-      id="submit"
+      disabled={disabled}
+      data-testid="submit-button"
+      aria-disabled={disabled}
       onClick={() => submit(value)}
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
