@@ -16,6 +16,7 @@ export default function Suggestion({ country }: {
   return (
     <li
       className={styles.suggestion}
+      data-suggestion
       onClick={handleClick}
       ref={liRef}
       tabIndex={0}

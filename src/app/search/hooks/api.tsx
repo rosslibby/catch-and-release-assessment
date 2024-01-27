@@ -18,7 +18,7 @@ export const useApi = () => {
 
     const cached = await hasCountry(value)
 
-    if (!cached) {
+    if (!cached && value) {
       const result = await fetch(`/api/country/${value.toUpperCase()}`)
       if (result.status === 200) {
         const { data } = await result.json()

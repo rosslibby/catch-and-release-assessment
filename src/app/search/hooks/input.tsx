@@ -36,7 +36,11 @@ export const useInput = () => {
 
     const keydown = (e: KeyboardEvent) => {
       if (e.key === 'Enter') {
-        submit(value)
+        if (current && document.activeElement === current) {
+          submit(value)
+        } else if ((document.activeElement as HTMLElement)?.dataset.suggestion) {
+          (document.activeElement as HTMLElement).click()
+        }
       } else if (e.key === 'ArrowDown' && results.length && suggestions) {
         (suggestions.firstChild as HTMLElement)?.focus()
       }
