@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import styles from './country.module.css'
-import { cacheCtx } from '../cache'
-import { Country } from '../cache/types'
+import { cacheCtx } from '@/app/cache'
 
 export default function Country() {
   const { country } = useContext(cacheCtx)

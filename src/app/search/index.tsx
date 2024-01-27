@@ -8,9 +8,9 @@ import {
 } from 'react'
 import styles from './search.module.css'
 import { useSearch } from './hooks'
-import { cacheCtx, useCache } from '../cache'
 import Suggestions from './suggestions'
 import Loading from './loading'
+import { cacheCtx, useCache } from '@/app/cache'
 
 export default function Search() {
   const suggestionsRef = useRef<HTMLUListElement>(null)

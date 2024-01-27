@@ -1,7 +1,13 @@
-import { Ref, forwardRef, useContext, useEffect, useImperativeHandle, useRef } from 'react'
+import {
+  Ref,
+  forwardRef,
+  useContext,
+  useImperativeHandle,
+  useRef,
+} from 'react'
 import styles from './suggestions.module.css'
-import { cacheCtx } from '../../cache'
-import { Country } from '../../cache/types'
+import { cacheCtx } from '@/app/cache'
+import { Country } from '@/app/cache/types'
 import Suggestion from './suggestion'
 import { useNav } from './hooks'
 
