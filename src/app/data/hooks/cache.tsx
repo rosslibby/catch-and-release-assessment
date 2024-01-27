@@ -1,10 +1,14 @@
 'use client'
 import { useContext, useEffect, useState } from 'react'
 import { Country, Data } from '../types'
-import { cacheCtx } from '..'
+import { appCtx } from '..'
 
 export const useCache = () => {
-  const { _: { setData, setCountry, setResults } } = useContext(cacheCtx)
+  const { _: {
+    setData,
+    setCountry,
+    setResults,
+  } } = useContext(appCtx)
   const [isEmpty, setIsEmpty] = useState<boolean>(true)
 
   useEffect(() => {

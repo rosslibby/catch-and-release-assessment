@@ -11,9 +11,11 @@ export interface Data {
   [key: string]: Country
 }
 
-export interface CacheData {
+export interface AppData {
   country?: Country | undefined
   data: Data
+  loading: boolean
+  message: string | null
   results: Country[]
   _: {
     [key: string]: Function
