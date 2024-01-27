@@ -6,6 +6,15 @@ export async function GET(
   { params }: { params: { code: string } },
 ) {
   const { code } = params
+
+  if (!code || code.match(/[^a-zA-Z .]/g)?.length || code.length > 2) {
+    return NextResponse.json({
+      data: {
+        message: code ? 'The country code you submitted was invalid' : 'No country code was provided',
+      },
+    }, { status: code ? 400 : 422 })
+  }
+
   const query = `query GetCountryById($code: ID!) {
     country(code: $code) {
       code
@@ -45,7 +54,11 @@ export async function GET(
   )
 
   return NextResponse.json(
-    { data },
-    { status: 200 },
+    {
+      data: data || {
+        message: `No data found for country code ${code}`,
+      },
+    },
+    { status: data ? 200 : 404 },
   )
 }
