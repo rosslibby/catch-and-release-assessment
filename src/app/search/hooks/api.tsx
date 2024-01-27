@@ -20,10 +20,8 @@ export const useApi = () => {
 
     if (!cached) {
       const result = await fetch(`/api/country/${value.toUpperCase()}`)
-      console.log(result)
       if (result.status === 200) {
         const { data } = await result.json()
-        console.log(data)
         addCountry(data)
         setCountry(data)
       } else {
