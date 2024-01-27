@@ -12,6 +12,10 @@
   overflow: hidden;
 }
 
+.searchFocus {
+  outline: 24px solid #00000008;
+}
+
 .searchButton {
   background-color: transparent;
   border: none;
