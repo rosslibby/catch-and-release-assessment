@@ -39,9 +39,7 @@ describe('/api/country/ZT', () => {
 
       expect(response.status).toBe(404)
       expect(await response.json()).toEqual({
-        data: {
-          message: 'No data found for country code ZT',
-        },
+        message: 'No data found for country code ZT',
       })
     },
   )
@@ -59,9 +57,7 @@ describe('/api/country', () => {
 
       expect(response.status).toBe(422)
       expect(await response.json()).toEqual({
-        data: {
-          message: 'No country code was provided',
-        },
+        message: 'No country code was provided',
       })
     },
   )
@@ -79,9 +75,7 @@ describe('/api/country/4A', () => {
 
       expect(response.status).toBe(400)
       expect(await response.json()).toEqual({
-        data: {
-          message: 'The country code you submitted was invalid',
-        },
+        message: 'The country code you submitted was invalid',
       })
     },
   )
