@@ -1,8 +1,9 @@
-import { Ref, RefObject, useEffect } from 'react'
+import { RefObject, useEffect } from 'react'
 
-export const useNav = (ref: RefObject<HTMLUListElement>) => {
-  const NAV_KEYS = ['ArrowUp', 'ArrowDown']
-
+export const useNav = (
+  ref: RefObject<HTMLUListElement>,
+  input: RefObject<HTMLInputElement>,
+) => {
   useEffect(() => {
     let current = ref.current || null
     const handleKeys = (e: KeyboardEvent) => {
@@ -12,6 +13,9 @@ export const useNav = (ref: RefObject<HTMLUListElement>) => {
 
           if (previousSibling) {
             previousSibling.focus()
+          } else {
+            input.current?.focus()
+            setTimeout(() => input.current?.select())
           }
         } else if (e.key === 'ArrowDown') {
           const nextSibling = document.activeElement?.nextSibling as HTMLElement
