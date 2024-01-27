@@ -7,7 +7,7 @@ Hey all, thanks for reviewing my project!
 
 I utilized the recommended [Countries](https://countries.trevorblades.com/) GraphQL API
 
-The project can be run by cloning this repo or using the Docker image. If you choose to clone, here are the steps:
+The project can be run by cloning this repo or using [the Docker image](https://hub.docker.com/r/rlibby/c-and-r-assessment). If you choose to clone, here are the steps:
 
 1. Clone this repo
 2. `npm install` to install dependencies
