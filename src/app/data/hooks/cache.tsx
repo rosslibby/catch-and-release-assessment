@@ -12,6 +12,8 @@ export const useCache = () => {
   } } = useContext(appCtx)
 
   useEffect(() => {
+    if (!window.caches) return
+
     caches.open('countries')
       .then(async (cache: Cache) => {
         const keys = await cache.keys()
