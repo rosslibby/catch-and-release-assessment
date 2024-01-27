@@ -1,13 +1,13 @@
-import { Country } from '@/app/cache/types'
+import { Country } from '@/app/data/types'
 import styles from './suggestions.module.css'
 import { useContext, useRef } from 'react'
-import { cacheCtx } from '@/app/cache'
+import { appCtx } from '@/app/data'
 
 export default function Suggestion({ country }: {
   country: Country
 }) {
   const liRef = useRef<HTMLLIElement>(null)
-  const { _: { setCountry, setResults } } = useContext(cacheCtx)
+  const { _: { setCountry, setResults } } = useContext(appCtx)
   const handleClick = () => {
     setCountry(country)
     setResults([])
