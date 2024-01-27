@@ -21,6 +21,22 @@
   padding: 0.625rem 1.25rem;
 }
 
+.title {
+  align-items: center;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: min-content min-content;
+}
+
+.code {
+  color: #3b467c;
+  font-weight: 600;
+}
+
+.emoji {
+  font-size: 1.5rem;
+}
+
 .key {
   font-weight: 600;
   text-transform: capitalize;
