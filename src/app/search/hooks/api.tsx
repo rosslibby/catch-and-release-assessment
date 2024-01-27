@@ -11,6 +11,8 @@ export const useApi = () => {
   } } = useContext(appCtx)
 
   const submit = useCallback(async (value: string) => {
+    if (value.trim().match(/[^a-zA-Z]/g)?.length) return
+
     setMessage(null)
     setResults([])
     setCountry()
@@ -18,7 +20,7 @@ export const useApi = () => {
 
     const cached = await hasCountry(value)
 
-    if (!cached && value) {
+    if (!cached && value.trim()) {
       const result = await fetch(`/api/country/${value.toUpperCase()}`)
       if (result.status === 200) {
         const { data } = await result.json()

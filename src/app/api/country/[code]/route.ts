@@ -7,7 +7,7 @@ export async function GET(
 ) {
   const { code } = params
 
-  if (!code || code.match(/[^a-zA-Z .]/g)?.length || code.length > 2) {
+  if (!code || (code.match(/[^a-zA-Z]/g)?.length) || code.length > 2) {
     return NextResponse.json({
       message: code ? 'The country code you submitted was invalid' : 'No country code was provided',
     }, { status: code ? 400 : 422 })

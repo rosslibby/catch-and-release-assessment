@@ -60,8 +60,8 @@ export const useInput = () => {
   }, [inputRef, results, suggestionsRef, submit])
 
   const changeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value.toUpperCase())
-    filter(e.target.value)
+    setValue(e.target.value.trim().toUpperCase())
+    filter(e.target.value.trim())
   }
 
   const registerRefs = (
