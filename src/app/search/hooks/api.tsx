@@ -11,7 +11,11 @@ export const useApi = () => {
   } } = useContext(appCtx)
 
   const submit = useCallback(async (value: string) => {
-    if (value.trim().match(/[^a-zA-Z]/g)?.length) return
+    if (!value.trim().match(/^[a-zA-Z]+$/g)) {
+      setMessage('Please enter a valid country code')
+
+      return
+    }
 
     setMessage(null)
     setResults([])
