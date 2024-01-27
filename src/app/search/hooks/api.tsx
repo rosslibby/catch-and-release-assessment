@@ -30,14 +30,6 @@ export const useApi = () => {
         const { message } = await result.json()
         setMessage(message)
       }
-      // const { data } = await (await fetch(`/api/country/${value.toUpperCase()}`)).json()
-
-      // if (data) {
-      //   addCountry(data)
-      //   setCountry(data)
-      // } else {
-      //   setMessage(`No results found for ${value.toUpperCase()}`)
-      // }
     } else {
       setCountry(cached)
     }
