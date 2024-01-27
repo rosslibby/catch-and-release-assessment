@@ -1,7 +1,7 @@
 'use client'
+import { cacheCtx } from '@/app/cache'
+import { Country } from '@/app/cache/types'
 import { useContext } from 'react'
-import { cacheCtx } from '../cache'
-import { Country } from '../cache/types'
 
 declare global {
   interface String {
