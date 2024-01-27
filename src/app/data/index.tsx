@@ -4,6 +4,7 @@ import { AppData, Country, Data } from './types'
 
 export const appCtx = createContext<AppData>({
   data: {},
+  isEmpty: true,
   loading: false,
   message: null,
   results: [],
@@ -16,6 +17,7 @@ export default function AppProvider({ children }: {
   const [country, setCountry]
     = useState<Country | undefined>(undefined)
   const [data, setData] = useState<Data>({})
+  const [isEmpty, setIsEmpty] = useState<boolean>(true)
   const [results, setResults] = useState<Country[]>([])
   const [message, setMessage] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
@@ -24,12 +26,14 @@ export default function AppProvider({ children }: {
     <appCtx.Provider value={{
       country,
       data,
+      isEmpty,
       loading,
       message,
       results,
       _: {
         setCountry,
         setData,
+        setIsEmpty,
         setLoading,
         setMessage,
         setResults,

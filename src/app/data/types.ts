@@ -14,6 +14,7 @@ export interface Data {
 export interface AppData {
   country?: Country | undefined
   data: Data
+  isEmpty: boolean
   loading: boolean
   message: string | null
   results: Country[]

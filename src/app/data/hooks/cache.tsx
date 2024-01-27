@@ -4,16 +4,14 @@ import { Country, Data } from '../types'
 import { appCtx } from '..'
 
 export const useCache = () => {
-  const { _: {
-    setData,
+  const { isEmpty, _: {
     setCountry,
+    setData,
+    setIsEmpty,
     setResults,
   } } = useContext(appCtx)
-  const [isEmpty, setIsEmpty] = useState<boolean>(true)
 
   useEffect(() => {
-    if (!window.caches) return
-
     caches.open('countries')
       .then(async (cache: Cache) => {
         const keys = await cache.keys()
